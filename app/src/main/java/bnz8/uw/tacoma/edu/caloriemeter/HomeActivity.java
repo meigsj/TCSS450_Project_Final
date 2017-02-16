@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class HomeActivity extends AppCompatActivity {
+import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
+
+public class HomeActivity extends AppCompatActivity implements FoodListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,4 +28,8 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onListFragmentInteraction(Food item) {
+
+    }
 }

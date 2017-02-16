@@ -13,7 +13,9 @@
     <string name="lastnameHint">Last name </string>
     <string name="SignUpButton">Sign up</string>
     <string name="cancelButton">Cancel</string>
-
+    <string name="loggedin">loggedin</string>
+    <string name="loggedin_email">loggedin_email</string>
+    <string name="login_prefs">edu.uw.tacoma.bnz8.caloriemeter.prefs</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
