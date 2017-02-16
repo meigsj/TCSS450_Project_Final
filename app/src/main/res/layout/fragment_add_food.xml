@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="bnz8.uw.tacoma.edu.caloriemeter.AddFoodFragment">
+
+
+    <EditText
+        android:id="@+id/food_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter A Food"/>
+
+
+    <EditText
+        android:id="@+id/food_cal_count_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the foods Calorie Count"/>
+
+
+    <Button
+        android:id="@+id/add_food_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Food Item"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:onClick="addFood"/>
+</LinearLayout>
