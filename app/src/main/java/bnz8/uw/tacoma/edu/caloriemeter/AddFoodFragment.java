@@ -28,7 +28,7 @@ public class AddFoodFragment extends Fragment {
     private static final String CALORIE_COUNT = "Calorie_Count";
 
     private final static String FOOD_ADD_URL
-            = "http://cssgate.insttech.washington.edu/~bnz8/addCustomFood.php?";
+            = "http://cssgate.insttech.washington.edu/~meigsj/addCustomFood.php?";
 
 
     private String mFoodName;

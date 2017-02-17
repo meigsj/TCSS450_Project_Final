@@ -19,7 +19,7 @@ public class Food implements Serializable{
 
 
     public static final String NAME = "name";
-    public static final String CAL_CAOUNT = "calcount";
+    public static final String CAL_COUNT = "calorie_count";
 
 
     private String mName;
@@ -65,7 +65,7 @@ public class Food implements Serializable{
                 for (int i = 0; i < arr.length(); i++) {
                     Log.e("JSONN", arr.getJSONObject(i).toString());
                     JSONObject obj = arr.getJSONObject(i);
-                    Food food = new Food(obj.getString(Food.NAME),obj.getString(Food.CAL_CAOUNT));
+                    Food food = new Food(obj.getString(Food.NAME),obj.getString(Food.CAL_COUNT));
                     foodList.add(food);
                 }
             } catch (JSONException e) {

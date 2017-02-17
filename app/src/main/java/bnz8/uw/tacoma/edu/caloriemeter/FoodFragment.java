@@ -38,7 +38,7 @@ public class FoodFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private static final String FOOD_URL
-            = "http://cssgate.insttech.washington.edu/~meigsj/list.php?cmd=courses";
+            = "http://cssgate.insttech.washington.edu/~meigsj/food_list.php?cmd=food";
 
 
     /**
@@ -70,7 +70,7 @@ public class FoodFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_food, container, false);
+        View view = inflater.inflate(R.layout.fragment_food_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -81,7 +81,7 @@ public class FoodFragment extends Fragment {
             } else {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            DownloadFoodsTask task = new DownloadFoodsTask();
+            DownloadFoodTask task = new DownloadFoodTask();
             task.execute(new String[]{FOOD_URL});
         }
         FloatingActionButton floatingActionButton = (FloatingActionButton)
@@ -120,11 +120,11 @@ public class FoodFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Food food);
+        void onListFragmentInteraction(Food item);
     }
 
 
-    private class DownloadFoodsTask extends AsyncTask<String, Void, String> {
+    private class DownloadFoodTask extends AsyncTask<String, Void, String> {
 
 
         @Override
@@ -182,5 +182,4 @@ public class FoodFragment extends Fragment {
 
 
     }
-
 }

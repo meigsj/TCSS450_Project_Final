@@ -1,10 +1,16 @@
 package bnz8.uw.tacoma.edu.caloriemeter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,8 +26,10 @@ import java.net.URL;
 import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
 
 public class HomeActivity extends AppCompatActivity implements FoodFragment.OnListFragmentInteractionListener,
-AddFoodFragment.FoodAddListener{
+AddFoodFragment.FoodAddListener {
 
+
+    private Intent mIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +59,16 @@ AddFoodFragment.FoodAddListener{
 
     @Override
     public void onListFragmentInteraction(Food item) {
-        FoodDetailFragment courseDetailFragment = new FoodDetailFragment();
+        FoodDetailFragment foodDetailFragment = new FoodDetailFragment();
         Bundle args = new Bundle();
         args.putSerializable(FoodDetailFragment.FOOD_ITEM_SELECTED, item);
-        courseDetailFragment.setArguments(args);
+        foodDetailFragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, courseDetailFragment)
+                .replace(R.id.fragment_container, foodDetailFragment)
                 .addToBackStack(null)
                 .commit();
     }
-
 
     @Override
     public void addFood(String url) {
@@ -72,6 +79,7 @@ AddFoodFragment.FoodAddListener{
 // Takes you back to the previous fragment by popping the current fragment out.
         getSupportFragmentManager().popBackStackImmediate();
     }
+
 
 
     private class AddFoodTask extends AsyncTask<String, Void, String> {
@@ -124,7 +132,7 @@ AddFoodFragment.FoodAddListener{
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
-                    Toast.makeText(getApplicationContext(), "Course successfully added!"
+                    Toast.makeText(getApplicationContext(), "Successfully added!"
                             , Toast.LENGTH_LONG)
                             .show();
                 } else {
