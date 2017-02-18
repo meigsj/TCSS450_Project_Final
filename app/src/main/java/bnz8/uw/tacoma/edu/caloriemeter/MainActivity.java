@@ -25,16 +25,16 @@ import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity implements SignInFragment.LoginInteractionListener {
     private Intent mIntent;
-    private static final String REG_URL = "http://cssgate.insttech.washington.edu/~bnz8/adduser.php?";
-    private static final String LOGIN_URL = "http://cssgate.insttech.washington.edu/~bnz8/login.php?";
+    private static final String REG_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/adduser.php?";
+    private static final String LOGIN_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/login.php?";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, new SignInFragment())
-                        .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, new SignInFragment())
+                    .commit();
             }
 
     @Override
@@ -52,12 +52,6 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
             Toast.makeText(this, "No network connection available. Cannot provide services",
                     Toast.LENGTH_LONG).show();
         }
-
-
-//        Intent i = new Intent(this, HomeActivity.class);
-//        startActivity(i);
-//        finish();
-
 
     }
 
@@ -135,8 +129,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
-//                    Toast.makeText(getApplicationContext(), jsonObject.get("message").toString()
-//                            , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Success",Toast.LENGTH_LONG).show();
                     startActivity(mIntent);
                     MainActivity.this.finish();
                 } else {
@@ -147,50 +140,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
             catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "Something wrong with the data" +
                         e.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e("WRX2", "exception thrown"+ e.getMessage());
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    private boolean comfirm(String email, String password) {
-//        boolean result = true;
-//
-//        if (TextUtils.isEmpty(email)) {
-//            Toast.makeText(this, "Please enter your email.", Toast.LENGTH_LONG).show();
-//            result = false;
-//        } else if (!email.contains("@")) {
-//            Toast.makeText(this, "Please enter a valid email.", Toast.LENGTH_LONG).show();
-//            result = false;
-//        } else if (email.length() > 40) {
-//            Toast.makeText(this, "Please enter a valid email (less than fourty characters).",
-//                    Toast.LENGTH_LONG).show();
-//            result = false;
-//        } else if (TextUtils.isEmpty(password)) {
-//            Toast.makeText(this, "Please enter your password.", Toast.LENGTH_LONG).show();
-//            result = false;
-//        } else if (password.length() > 20) {
-//            Toast.makeText(this, "Please enter a valid password (less than twenty characters).",
-//                    Toast.LENGTH_LONG).show();
-//            result = false;
-//        } else if (password.length() < 6) {
-//            Toast.makeText(this, "Please enter a valid password (more than six characters).",
-//                    Toast.LENGTH_LONG).show();
-//            result = false;
-//        }
-//
-//        return result;
-//    }

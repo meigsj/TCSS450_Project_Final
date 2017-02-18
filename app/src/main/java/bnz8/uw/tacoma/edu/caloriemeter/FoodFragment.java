@@ -38,8 +38,7 @@ public class FoodFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private static final String FOOD_URL
-            = "http://cssgate.insttech.washington.edu/~meigsj/food_list.php?cmd=food";
-
+            = "http://cssgate.insttech.washington.edu/~_450bteam15/food_list.php?cmd=food";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

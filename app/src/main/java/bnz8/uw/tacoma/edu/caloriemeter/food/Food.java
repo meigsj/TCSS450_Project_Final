@@ -1,11 +1,9 @@
 package bnz8.uw.tacoma.edu.caloriemeter.food;
 
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.List;
 

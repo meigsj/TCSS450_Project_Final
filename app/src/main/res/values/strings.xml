@@ -4,8 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="Email_hint">Enter your Email</string>
-    <string name="pwd_hint">Enter your password</string>
+    <string name="Email_hint">Email</string>
+    <string name="pwd_hint">Password</string>
     <string name="login_text">SIGN IN</string>
     <string name="messagebody">"Eat a healthy diet \n       Live a healthy life \n              Easily monitor your Calorie intake!"</string>
     <string name="title_activity_home">HomeActivity</string>

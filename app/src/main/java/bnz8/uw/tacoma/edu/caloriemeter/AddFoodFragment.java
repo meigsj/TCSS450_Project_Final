@@ -28,9 +28,7 @@ public class AddFoodFragment extends Fragment {
     private static final String CALORIE_COUNT = "Calorie_Count";
 
     private final static String FOOD_ADD_URL
-            = "http://cssgate.insttech.washington.edu/~meigsj/addCustomFood.php?";
-
-
+            = "http://cssgate.insttech.washington.edu/~_450bteam15/addCustomFood.php?";
     private String mFoodName;
     private String mFoodCalCount;
 
@@ -40,8 +38,9 @@ public class AddFoodFragment extends Fragment {
 
     private FoodAddListener mListener;
 
+    // Required empty public constructor
     public AddFoodFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -108,11 +107,6 @@ public class AddFoodFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-
-
-
-
 
     public interface FoodAddListener {
         public void addFood(String url);

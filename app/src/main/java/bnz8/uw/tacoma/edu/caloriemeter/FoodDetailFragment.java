@@ -5,12 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
 
@@ -24,12 +22,12 @@ import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
  * create an instance of this fragment.
  */
 public class FoodDetailFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
@@ -85,7 +83,7 @@ public class FoodDetailFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -120,11 +118,11 @@ public class FoodDetailFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
+
         void onFragmentInteraction(Uri uri);
     }
 
     public void updateView(Food food) {
-        Toast.makeText(getView().getContext(), food.toString(), Toast.LENGTH_LONG).show();
         if (food != null) {
             mFoodNameTextView.setText(food.getName());
             mFoodCalorieTextView.setText(food.getCalorieCount());
@@ -149,3 +147,8 @@ public class FoodDetailFragment extends Fragment {
         }
     }
 }
+
+
+
+
+

@@ -15,23 +15,23 @@ public class RegisterFragment extends Fragment {
     private EditText mUsername;
     private EditText mPassword;
     private Button mSignupButton;
+    private Button mRegBtn;
 
+    // Required empty public constructor
     public RegisterFragment() {
-        // Required empty public constructor
-    }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_register, container, false);
-
         View v = inflater.inflate(R.layout.fragment_register, container, false);
 
         mUsername = (EditText) v.findViewById(R.id.email_signUp);
         mPassword = (EditText) v.findViewById(R.id.create_pw);
         mSignupButton = (Button) v.findViewById(R.id.sign_up_buton);
+
         mSignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,8 +41,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-
-    return v;
+        return v;
     }
 
 
@@ -58,6 +57,6 @@ public class RegisterFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void switchToSignUp();
     }
 }

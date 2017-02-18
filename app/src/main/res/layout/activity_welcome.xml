@@ -1,81 +1,62 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_welcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/ColorBlue"
     tools:context="bnz8.uw.tacoma.edu.caloriemeter.WelcomeActivity">
-
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
 
     <ImageView
         android:id="@+id/imageDisplay"
         android:layout_width="wrap_content"
-        android:layout_height="220dp"
+        android:layout_height="250dp"
         android:src="@drawable/caloriemeter"
-        android:layout_gravity="center_horizontal"
         />
     <TextView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:keepScreenOn="true"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:fontFamily="serif"
+        android:textColor="@color/ColorWhite"
+        android:textSize="@dimen/activity_vertical_margin"
+        android:freezesText="true"
         android:text="@string/messagebody"
-        android:textColor="#33b5e5"
-        android:textSize="29sp"
-        android:textStyle="bold" />
+        />
+
+    <Button
+        android:id="@+id/proceed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Log in "
+        android:onClick="proceedAction"
+        />
+
+    <Button
+        android:id="@+id/reg_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SignUpButton"
+        />
 
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:fontFamily="serif"-->
-        <!--android:textColor="@color/ColorWhite"-->
-        <!---->
-        <!--android:textSize="20sp"-->
-        <!--android:freezesText="true"-->
-        <!--android:textStyle="bold"-->
-        <!---->
-        <!--android:text="@string/messagebody"-->
-        <!--/>-->
-    <!--android:textSize="@dimen/activity_vertical_margin"-->
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
-
-            <!--<Button-->
-                <!--android:id="@+id/dummy_button"-->
-                <!--style="?metaButtonBarButtonStyle"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/dummy_button" />-->
 
 
-            <Button
-                android:id="@+id/proceed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Let's go"
-                android:onClick="proceedAction"
-                android:layout_weight="1" />
-        </LinearLayout>
+</LinearLayout>
 
-    </FrameLayout>
 
-</FrameLayout>
+
+
+
+
+
+
+
+
+
+

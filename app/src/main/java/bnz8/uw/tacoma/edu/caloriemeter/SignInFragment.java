@@ -17,22 +17,15 @@ import android.widget.Toast;
 public class SignInFragment extends Fragment {
     private Button mSignUpBtn;
 
+    // Required empty public constructor
     public SignInFragment() {
-        // Required empty public constructor
+
     }
-
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_sign_in, container, false);
-//    }
-// Inflate the layout for this fragment
-View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
+       // Inflate the layout for this fragment
+    View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
     final EditText userIdText = (EditText) v.findViewById(R.id.userid_edit);
     final EditText pwdText = (EditText) v.findViewById(R.id.pwd_edit);
 
@@ -45,37 +38,6 @@ View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
         public void onClick(View v) {
             String userId = userIdText.getText().toString();
             String pwd = pwdText.getText().toString();
-            if (TextUtils.isEmpty(userId)) {
-                Toast.makeText(v.getContext(), "Enter userid"
-                        , Toast.LENGTH_SHORT)
-                        .show();
-                userIdText.requestFocus();
-                return;
-            }
-            if (!userId.contains("@")) {
-                Toast.makeText(v.getContext(), "Enter a valid email address"
-                        , Toast.LENGTH_SHORT)
-                        .show();
-                userIdText.requestFocus();
-                return;
-            }
-
-            if (TextUtils.isEmpty(pwd)) {
-                Toast.makeText(v.getContext(), "Enter password"
-                        , Toast.LENGTH_SHORT)
-                        .show();
-                pwdText.requestFocus();
-                return;
-            }
-            if (pwd.length() < 6) {
-                Toast.makeText(v.getContext()
-                        , "Enter password of at least 6 characters"
-                        , Toast.LENGTH_SHORT)
-                        .show();
-                pwdText.requestFocus();
-                return;
-            }
-
             ((MainActivity) getActivity()).login(userId, pwd);
         }
     });
@@ -88,9 +50,6 @@ View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
         });
     return v;
 }
-
-
-
     public interface LoginInteractionListener {
         public void login(String userId, String pwd);
     }
