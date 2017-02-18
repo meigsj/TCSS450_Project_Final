@@ -1,7 +1,6 @@
 package bnz8.uw.tacoma.edu.caloriemeter;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * A class for the sign up fragment to retrieve user entries and
+ * pass to the register method in main activity.
+ */
 
 public class RegisterFragment extends Fragment {
     private EditText mUsername;
@@ -56,7 +59,6 @@ public class RegisterFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void switchToSignUp();
     }
 }

@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * A class that displays the welcome screen.
+ */
 
 public class WelcomeActivity extends AppCompatActivity implements RegisterFragment.OnFragmentInteractionListener{
     private Button mRegBtn;

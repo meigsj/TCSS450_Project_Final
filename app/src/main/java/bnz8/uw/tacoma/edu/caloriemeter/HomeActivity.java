@@ -1,16 +1,13 @@
 package bnz8.uw.tacoma.edu.caloriemeter;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,6 +21,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
+/**
+ * A class to hold  the list of foods.
+ */
 
 public class HomeActivity extends AppCompatActivity implements FoodFragment.OnListFragmentInteractionListener,
 AddFoodFragment.FoodAddListener {
