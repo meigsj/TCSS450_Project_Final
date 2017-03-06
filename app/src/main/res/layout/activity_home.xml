@@ -34,14 +34,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
 
-    <Button
-        android:id="@+id/share_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share"
-        android:layout_gravity="bottom|center_horizontal"
 
-        app:layout_anchorGravity="bottom|center_horizontal" />
 
     <include layout="@layout/content_home" />
 </android.support.design.widget.CoordinatorLayout>

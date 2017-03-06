@@ -7,21 +7,15 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +33,9 @@ import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
 
 public class HomeActivity extends AppCompatActivity implements FoodFragment.OnListFragmentInteractionListener,
 AddFoodFragment.FoodAddListener {
+    private ShareActionProvider mShareActionProvider;
+
+
 
 //    private LoginButton loginButton;
 
@@ -48,6 +45,8 @@ AddFoodFragment.FoodAddListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setTitle("Home");
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -92,14 +91,39 @@ AddFoodFragment.FoodAddListener {
         }
         return true;
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_food_list, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        super.onCreateOptionsMenu(menu);
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_log_out, menu);
+//        return true;
+//    }
 
+        @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate menu resource file.
+        getMenuInflater().inflate(R.menu.menu_share, menu);
+            getMenuInflater().inflate(R.menu.menu_log_out,menu);
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+        // Fetch and store ShareActionProvider
+//        mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.menu_item_share).getActionProvider();
+
+            mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+
+        // Return true to display menu
+        return true;
+
+//            mShareActionProvider.setOnShareTargetSelectedListener(this);
+
+
+    }
+    // Call to update the share intent
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
+    }
     @Override
     public void onListFragmentInteraction(Food item) {
         FoodDetailFragment foodDetailFragment = new FoodDetailFragment();

@@ -8,15 +8,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
 
     private Intent mIntent;
     private SharedPreferences mSharedPreferences;
-
     private static final String REG_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/adduser.php?";
     private static final String LOGIN_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/login.php?";
 
@@ -77,20 +70,21 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     /**
