@@ -10,25 +10,40 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
-
-
 public class SignInFragment extends Fragment {
     private Button mSignUpBtn;
+
 
     // Required empty public constructor
     public SignInFragment() {
 
     }
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        // Inflate the layout for this fragment
     View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
-    final EditText userIdText = (EditText) v.findViewById(R.id.userid_edit);
+
+
+
+
+
+
+
+
+
+
+
+
+        final EditText userIdText = (EditText) v.findViewById(R.id.userid_edit);
     final EditText pwdText = (EditText) v.findViewById(R.id.pwd_edit);
 
 
-    Button signInButton = (Button) v.findViewById(R.id.login_button);
+    Button signInButton = (Button) v.findViewById(R.id.login_button_nonfacebook);
         mSignUpBtn = (Button) v.findViewById(R.id.signUp_Button_toFragment);
 
         signInButton.setOnClickListener(new View.OnClickListener() {

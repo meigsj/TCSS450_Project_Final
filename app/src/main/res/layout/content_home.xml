@@ -14,7 +14,3 @@
     tools:showIn="@layout/activity_home">
 
 </FrameLayout>
-
-
-    <!--android:id="@+id/content_home"-->
-<!--was Relative Layout-->

@@ -31,9 +31,7 @@ import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
  */
 public class FoodFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
@@ -47,7 +45,6 @@ public class FoodFragment extends Fragment {
     public FoodFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static FoodFragment newInstance(int columnCount) {
         FoodFragment fragment = new FoodFragment();

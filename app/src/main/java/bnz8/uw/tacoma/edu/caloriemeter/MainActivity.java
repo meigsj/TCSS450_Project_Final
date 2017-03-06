@@ -2,12 +2,18 @@ package bnz8.uw.tacoma.edu.caloriemeter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +29,10 @@ import java.net.URLEncoder;
  * A class to manage log in and register fragments.
  */
 public class MainActivity extends AppCompatActivity implements SignInFragment.LoginInteractionListener {
+
     private Intent mIntent;
+    private SharedPreferences mSharedPreferences;
+
     private static final String REG_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/adduser.php?";
     private static final String LOGIN_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/login.php?";
 
@@ -31,15 +40,24 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+        if (mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        } else if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, new SignInFragment())
                     .commit();
-            }
+        }
+    }
 
     /**
      * A method to be able to switch the log in fragment to the Homeactivity class.
      * up on successfull entry of email and password and network connectivity.
-     * @param email the email to be entered.
+     *
+     * @param email    the email to be entered.
      * @param password the password to be entered.
      */
     @Override
@@ -47,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
 
-        if (networkInfo != null && networkInfo.isConnected()){
-
+        if (networkInfo != null && networkInfo.isConnected()) {
             mIntent = new Intent(this, HomeActivity.class);
             RegisteryTask task = new RegisteryTask();
             task.execute(buildString(email, password, LOGIN_URL));
@@ -60,17 +77,33 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     /**
      * A method to register new users up on checking network connectivity.
-     * @param email the email to be registered.
+     *
+     * @param email    the email to be registered.
      * @param password the password to be registered.
      */
-    public void register(String email, String password){
+    public void register(String email, String password) {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
 
-        if (networkInfo != null && networkInfo.isConnected()){
-
+        if (networkInfo != null && networkInfo.isConnected()) {
             mIntent = new Intent(this, HomeActivity.class);
             RegisteryTask task = new RegisteryTask();
             task.execute(buildString(email, password, REG_URL));
@@ -149,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
                     Toast.makeText(getApplicationContext(), "Success",Toast.LENGTH_LONG).show();
+                    mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN),true).commit();
                     startActivity(mIntent);
                     MainActivity.this.finish();
                 } else {
