@@ -64,6 +64,6 @@ public class SignInFragment extends Fragment {
     return v;
 }
     public interface LoginInteractionListener {
-        public void login(String userId, String pwd);
+        void login(String userId, String pwd);
     }
 }

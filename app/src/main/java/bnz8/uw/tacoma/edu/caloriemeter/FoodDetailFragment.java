@@ -1,6 +1,7 @@
 package bnz8.uw.tacoma.edu.caloriemeter;
 
-
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,21 +13,26 @@ import android.widget.TextView;
 import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link FoodDetailFragment} factory method to
- * create an instance of this fragment.
- */
 public class FoodDetailFragment extends Fragment {
-    public final static String FOOD_ITEM_SELECTED = "Food_selected";
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+
     private TextView mFoodNameTextView;
     private TextView mFoodCalorieTextView;
-// Required empty public constructor
-    public FoodDetailFragment() {
+    private TextView mFoodSugerTextView;
+    private TextView mFoodProteinTextView;
+    private TextView mFoodSodiumTextView;
 
+    private OnFragmentInteractionListener mListener;
+
+    public FoodDetailFragment() {
+        // Required empty public constructor
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -34,8 +40,13 @@ public class FoodDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_food_detail, container, false);
+
         mFoodNameTextView = (TextView) view.findViewById(R.id.food_name);
         mFoodCalorieTextView = (TextView) view.findViewById(R.id.food_cal_count);
+        mFoodSugerTextView = (TextView) view.findViewById(R.id.food_suger_count);
+        mFoodProteinTextView = (TextView) view.findViewById(R.id.food_protein_count);
+        mFoodSodiumTextView = (TextView) view.findViewById(R.id.food_sodium_count);
+
 
         FloatingActionButton floatingActionButton = (FloatingActionButton)
                 getActivity().findViewById(R.id.fab);
@@ -44,12 +55,41 @@ public class FoodDetailFragment extends Fragment {
         return view;
     }
 
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+
+        void onFragmentInteraction(Uri uri);
+    }
+
     public void updateView(Food food) {
         if (food != null) {
             mFoodNameTextView.setText(food.getName());
             mFoodCalorieTextView.setText(food.getCalorieCount());
+            mFoodSugerTextView.setText(food.getmSugerAmount());
+            mFoodProteinTextView.setText(food.getmProtienAmount());
+            mFoodSodiumTextView.setText(food.getmSodiumAmount());
         }
     }
+
+
+    public final static String FOOD_ITEM_SELECTED = "Food_selected";
 
     @Override
     public void onStart() {

@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
     private SharedPreferences mSharedPreferences;
     private static final String REG_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/adduser.php?";
     private static final String LOGIN_URL = "http://cssgate.insttech.washington.edu/~_450bteam15/login.php?";
-
+    private String mEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,13 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
         if (mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
-            startActivity(new Intent(this, HomeActivity.class));
+
+            String s = (mSharedPreferences.getString("loggedin_email",""));
+
+            Intent intent = new Intent(this, HomeActivity.class);
+            Bundle bundle = new Bundle();
+            intent.putExtra("Email",s);
+            startActivity(intent);
             finish();
         } else if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
         if (networkInfo != null && networkInfo.isConnected()) {
             mIntent = new Intent(this, HomeActivity.class);
             RegisteryTask task = new RegisteryTask();
+            mEmail =  email;
             task.execute(buildString(email, password, LOGIN_URL));
 
         } else {
@@ -100,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
         if (networkInfo != null && networkInfo.isConnected()) {
             mIntent = new Intent(this, HomeActivity.class);
             RegisteryTask task = new RegisteryTask();
+            mEmail =  email;
             task.execute(buildString(email, password, REG_URL));
         } else {
             Toast.makeText(this, "No network connection available. Cannot provide services",
@@ -177,6 +186,9 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
                 if (status.equals("success")) {
                     Toast.makeText(getApplicationContext(), "Success",Toast.LENGTH_LONG).show();
                     mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN),true).commit();
+                    mSharedPreferences.edit().putString("loggedin_email",mEmail).commit();
+                    mIntent.putExtra("Email",mEmail);
+
                     startActivity(mIntent);
                     MainActivity.this.finish();
                 } else {

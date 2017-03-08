@@ -1,5 +1,6 @@
 package bnz8.uw.tacoma.edu.caloriemeter;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -7,14 +8,18 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -25,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
 /**
@@ -34,16 +40,25 @@ import bnz8.uw.tacoma.edu.caloriemeter.food.Food;
 public class HomeActivity extends AppCompatActivity implements FoodFragment.OnListFragmentInteractionListener,
 AddFoodFragment.FoodAddListener {
     private ShareActionProvider mShareActionProvider;
-
+    private final static String FOOD_SELECT_URL
+            = "http://cssgate.insttech.washington.edu/~meigsj/selectFood.php?";
 
 
 //    private LoginButton loginButton;
 
     //    private CallbackManager callbackManager;
+    private Button selectFoodButton;
+    private String mEmail;
+    private String calorieTotal = "0";
+    private ArrayList<String> contentToBeShared;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        mEmail =  getIntent().getExtras().getString("Email");
+        contentToBeShared =  new ArrayList<>();
+        Intent intent = getIntent();
         setTitle("Home");
 
 
@@ -54,6 +69,9 @@ AddFoodFragment.FoodAddListener {
             @Override
             public void onClick(View view) {
                 AddFoodFragment foodAddFragment = new AddFoodFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("user_email",mEmail);
+                foodAddFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, foodAddFragment)
                         .addToBackStack(null)
@@ -61,8 +79,33 @@ AddFoodFragment.FoodAddListener {
 
             }
         });
+        selectFoodButton = (Button) findViewById(R.id.select_food_button);
+
+        selectFoodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelectFoodFragment foodSelectFragment = new SelectFoodFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("Email",mEmail);
+                foodSelectFragment.setArguments(bundle);
+                //selectFoodButton.setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, foodSelectFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
         if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
             FoodFragment foodFragment = new FoodFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("Email",mEmail);
+            bundle.putString("CalTotal", calorieTotal);
+
+            bundle.putStringArrayList("content",contentToBeShared);
+            foodFragment.setArguments(bundle);
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, foodFragment)
                     .commit();
@@ -88,6 +131,30 @@ AddFoodFragment.FoodAddListener {
             startActivity(i);
             finish();
             return true;
+        } if(id == R.id.menu_item_share) {
+            Intent sentIntent = new Intent();
+            sentIntent.setAction(Intent.ACTION_SEND);
+
+
+
+            TextView calorieDisplay = (TextView) findViewById(R.id.calorieDisplayAmountTextView);
+            StringBuilder sb = new StringBuilder();
+
+            calorieTotal = calorieDisplay.getText().toString();
+            sb.append( "Calorie total for " + mEmail + " is: " + calorieTotal);
+            sb.append('\n');
+            sb.append('\n');
+            sb.append("Their Menu Was: ");
+
+            for(String menuItem: contentToBeShared) {
+                sb.append(menuItem);
+            }
+
+            sentIntent.putExtra(Intent.EXTRA_TEXT,sb.toString());
+
+            sentIntent.setType("text/plain");
+            startActivity(sentIntent);
+            finish();
         }
         return true;
     }
@@ -102,8 +169,10 @@ AddFoodFragment.FoodAddListener {
         @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
+            //
+
         getMenuInflater().inflate(R.menu.menu_share, menu);
-            getMenuInflater().inflate(R.menu.menu_log_out,menu);
+        getMenuInflater().inflate(R.menu.menu_log_out,menu);
         // Locate MenuItem with ShareActionProvider
         MenuItem item = menu.findItem(R.id.menu_item_share);
         // Fetch and store ShareActionProvider
@@ -125,23 +194,34 @@ AddFoodFragment.FoodAddListener {
         }
     }
     @Override
-    public void onListFragmentInteraction(Food item) {
+    public void onListFragmentInteraction(Food food) {
         FoodDetailFragment foodDetailFragment = new FoodDetailFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(FoodDetailFragment.FOOD_ITEM_SELECTED, item);
-        foodDetailFragment.setArguments(args);
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if(f instanceof SelectFoodFragment) {
+            String s = FOOD_SELECT_URL;
+            s += "&foodID=";
+            s += food.getID();
+            s += "&user_email=";
+            s += mEmail;
+            addFood(s);
+        } else {
+            Bundle args = new Bundle();
+            args.putSerializable(FoodDetailFragment.FOOD_ITEM_SELECTED, food);
+            foodDetailFragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, foodDetailFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, foodDetailFragment)
-                .addToBackStack(null)
-                .commit();
+
     }
+
 
     @Override
     public void addFood(String url) {
-
         AddFoodTask task = new AddFoodTask();
-        task.execute(new String[]{url.toString()});
+        task.execute(url.toString());
 
 // Takes you back to the previous fragment by popping the current fragment out.
         getSupportFragmentManager().popBackStackImmediate();
@@ -208,8 +288,8 @@ AddFoodFragment.FoodAddListener {
                             .show();
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Something wrong with the data: " +
-                        e.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Something wrong with the data: " +
+                //        e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }

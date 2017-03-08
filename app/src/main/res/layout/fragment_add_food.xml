@@ -5,19 +5,41 @@
     android:orientation="vertical"
     tools:context="bnz8.uw.tacoma.edu.caloriemeter.AddFoodFragment">
 
-
     <EditText
         android:id="@+id/food_name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter A Food"/>
-
-
+        android:hint="Enter A New Food"/>
     <EditText
         android:id="@+id/food_cal_count_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter the foods Calorie Count"/>
+
+    <EditText
+        android:id="@+id/food_suger_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the foods Sugar Count"/>
+
+
+    <EditText
+        android:id="@+id/food_protein_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the foods Protein Count"/>
+    <EditText
+        android:id="@+id/food_sodium_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the foods Sodium Count"/>
+
+    <CheckBox
+        android:id="@+id/private_or_public_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Private Food"
+        />
 
 
     <Button

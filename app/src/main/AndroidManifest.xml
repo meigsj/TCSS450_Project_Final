@@ -42,6 +42,10 @@
         <!-- android:theme="@style/FullscreenTheme"> -->
         <!--  -->
         <!-- </activity> -->
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1642543012708368"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

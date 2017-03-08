@@ -56,7 +56,7 @@ public class WelcomeActivity extends AppCompatActivity implements RegisterFragme
         mcallbackManager.onActivityResult(requestCode,resultCode,data);
 
     }
-    // A methd to change welcome activity to log in fragment
+    // A method to change welcome activity to log in fragment
     public void proceedAction(View v){
         Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
         startActivity(intent);

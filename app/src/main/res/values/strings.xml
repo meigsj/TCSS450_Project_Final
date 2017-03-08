@@ -16,9 +16,7 @@
     <string name="loggedin_email">loggedin_email</string>
     <string name="LOGIN_PREFS">edu.uw.tacoma.bnz8.caloriemeter.prefs</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
-    <string name="dummy_button">Dummy Button</string>
     <string name="action_logout">Logout</string>
     <string name="action_settings">Profile Settings</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="facebook_app_id">1642543012708368</string>
 </resources>
