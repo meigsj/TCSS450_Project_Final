@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
 
         if (networkInfo != null && networkInfo.isConnected()) {
             mIntent = new Intent(this, HomeActivity.class);
-            RegisteryTask task = new RegisteryTask();
+            LogInTask task = new LogInTask();
             mEmail =  email;
             task.execute(buildString(email, password, LOGIN_URL));
 
@@ -77,22 +77,6 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
         }
 
     }
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
 
     /**
@@ -110,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
             RegisteryTask task = new RegisteryTask();
             mEmail =  email;
             task.execute(buildString(email, password, REG_URL));
+
+
         } else {
             Toast.makeText(this, "No network connection available. Cannot provide services",
                     Toast.LENGTH_LONG).show();
@@ -147,7 +133,10 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
         return stringBuilder.toString();
     }
 
-    private class RegisteryTask extends AsyncTask<String, Void, String> {
+    /**
+     * Inner class to log in a user by checking if they already exist in the database.
+     */
+    private class LogInTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -184,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
                 if (status.equals("success")) {
-                    Toast.makeText(getApplicationContext(), "Success",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), mEmail,Toast.LENGTH_SHORT).show();
                     mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN),true).commit();
                     mSharedPreferences.edit().putString("loggedin_email",mEmail).commit();
                     mIntent.putExtra("Email",mEmail);
@@ -193,7 +182,64 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
                     MainActivity.this.finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed! " + jsonObject.get("error")
-                            , Toast.LENGTH_LONG).show();
+                            , Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch (JSONException e) {
+                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                        e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    /**
+     * Inner class to register a new user by checking if they don't exist in the database.
+     */
+
+    private class RegisteryTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    response = "Unable to Register, Reason: " + e.getMessage();
+                } finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // Something wrong with the network or the URL.
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                String status = (String) jsonObject.get("result");
+                if (status.equals("success")) {
+                    Toast.makeText(getApplicationContext(), "User Successfully registered",Toast.LENGTH_SHORT).show();
+                    mIntent.putExtra("Email",mEmail);
+                    startActivity(mIntent);
+                    MainActivity.this.finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to sign up! " + jsonObject.get("error")
+                            , Toast.LENGTH_SHORT).show();
                 }
             }
             catch (JSONException e) {

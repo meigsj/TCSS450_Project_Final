@@ -127,7 +127,7 @@ AddFoodFragment.FoodAddListener {
                     .commit();
             msharedPreferences.edit().putString(getString(R.string.loggedin_email), null).commit();
 
-            Intent i = new Intent(this, WelcomeActivity.class);
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             finish();
             return true;

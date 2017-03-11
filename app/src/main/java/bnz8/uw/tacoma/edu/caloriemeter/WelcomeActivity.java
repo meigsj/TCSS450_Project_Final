@@ -66,6 +66,7 @@ public class WelcomeActivity extends AppCompatActivity implements RegisterFragme
     public void switchToSignUp() {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new RegisterFragment()).addToBackStack(null).commit();
+                new RegisterFragment()).addToBackStack(null)
+                .commit();
     }
 }
