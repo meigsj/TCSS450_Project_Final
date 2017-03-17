@@ -30,7 +30,7 @@ public class AddFoodFragment extends Fragment {
     public static final String USER_EMAIL = "user_email";
 
     private final static String FOOD_ADD_URL
-            = "http://cssgate.insttech.washington.edu/~meigsj/addCustomFood.php?";
+            = "http://cssgate.insttech.washington.edu/~_450bteam15/addCustomFood.php?";
     private String mFoodName;
     private String mFoodCalCount;
     private String mSugerAmount;
@@ -165,10 +165,12 @@ public class AddFoodFragment extends Fragment {
             CheckBox privateOrPublic = (CheckBox) fragmentView.findViewById(R.id.private_or_public_checkbox);
             sb.append("&user_email=");
             if(!privateOrPublic.isChecked()) {
-                sb.append(PUBLIC_EMAIL);
+                sb.append(mEmail);
+                sb.append("&private=false");
 
             } else {
                 sb.append(mEmail);
+                sb.append("&private=true");
             }
             Log.d("AddFoodFragment", sb.toString());
 

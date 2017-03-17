@@ -72,14 +72,11 @@ public class Food implements Serializable{
      */
     public static String parseFoodJSON(String foodJSON, List<Food> foodList) {
         String reason = null;
-        //Log.i("TAG", foodJSON);
         JSONObject obj;
         if (foodJSON != null) {
             try {
                 JSONArray arr = new JSONArray(foodJSON);
-                //Log.e("JSONNArrayLen", String.valueOf(arr.length()));
                 for (int i = 0; i < arr.length(); i++) {
-                    //Log.e("JSONN", arr.getJSONObject(i).toString());
                     obj = arr.getJSONObject(i);
                     Food food = new Food(obj.getString(Food.ID),obj.getString(Food.NAME),obj.getString(Food.CAL_COUNT),
                             obj.getString(Food.SUGER_AMOUNT),obj.getString(Food.PROTIEN_AMOUNT),

@@ -45,12 +45,8 @@ public class FoodFragment extends Fragment {
     private String mEmail;
     private String mCalTotal;
 
-    /*
     private static final String FOOD_URL
-            = "http://cssgate.insttech.washington.edu/~_450bteam15/food_list.php?cmd=food";
-    */
-    private static final String FOOD_URL
-            = "http://cssgate.insttech.washington.edu/~meigsj/food_list.php?cmd=food";
+            = "http://cssgate.insttech.washington.edu/~_450bteam15/food_list.php?cmd=display";
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -61,7 +57,6 @@ public class FoodFragment extends Fragment {
     @SuppressWarnings("unused")
     public static FoodFragment newInstance(int columnCount) {
         FoodFragment fragment = new FoodFragment();
-
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -71,7 +66,6 @@ public class FoodFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Fragment f = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -182,7 +176,6 @@ public class FoodFragment extends Fragment {
                         .show();
                 return;
             }
-            //mFoodList = new ArrayList<Food>();
             List<Food> foodList = new ArrayList<Food>();
             result = Food.parseFoodJSON(result, foodList);
             int calorie_total = calcTotalCalories(foodList);
@@ -202,6 +195,12 @@ public class FoodFragment extends Fragment {
             }
         }
 
+
+        /**
+         * A Method that calculates the total amount of calories a list of foods has.
+         * @param foods All the foods in the menu
+         * @return The Amount of calories as a int.
+         */
         public int calcTotalCalories(List<Food> foods) {
             int calorieTotal = 0;
             int i = 0;

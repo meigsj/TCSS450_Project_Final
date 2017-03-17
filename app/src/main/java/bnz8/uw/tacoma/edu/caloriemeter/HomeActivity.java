@@ -41,12 +41,8 @@ public class HomeActivity extends AppCompatActivity implements FoodFragment.OnLi
 AddFoodFragment.FoodAddListener {
     private ShareActionProvider mShareActionProvider;
     private final static String FOOD_SELECT_URL
-            = "http://cssgate.insttech.washington.edu/~meigsj/selectFood.php?";
+            = "http://cssgate.insttech.washington.edu/~_450bteam15/selectFood.php?";
 
-
-//    private LoginButton loginButton;
-
-    //    private CallbackManager callbackManager;
     private Button selectFoodButton;
     private String mEmail;
     private String calorieTotal = "0";

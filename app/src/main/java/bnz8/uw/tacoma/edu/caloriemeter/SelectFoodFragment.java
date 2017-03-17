@@ -36,13 +36,8 @@ public class SelectFoodFragment extends Fragment {
 
     private String mEmail;
 
-
-    /*
     private static final String FOOD_URL
-            = "http://cssgate.insttech.washington.edu/~_450bteam15/food_list.php?cmd=food";
-    */
-    private static final String FOOD_URL
-            = "http://cssgate.insttech.washington.edu/~meigsj/food_list.php?cmd=select";
+            = "http://cssgate.insttech.washington.edu/~_450bteam15/food_list.php?cmd=select";
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -63,7 +58,6 @@ public class SelectFoodFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Fragment f = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }

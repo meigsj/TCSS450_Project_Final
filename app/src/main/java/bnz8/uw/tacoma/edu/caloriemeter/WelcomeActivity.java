@@ -19,43 +19,15 @@ import com.facebook.login.widget.LoginButton;
 
 public class WelcomeActivity extends AppCompatActivity implements RegisterFragment.OnFragmentInteractionListener{
 
-    private LoginButton mloginButton;
-    private CallbackManager mcallbackManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_welcome);
-        mloginButton = (LoginButton)findViewById(R.id.fb_login_button);
         setTitle("Calorie Meter");
 
-        mcallbackManager = CallbackManager.Factory.create();
-        mloginButton.registerCallback(mcallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(WelcomeActivity.this,HomeActivity.class);
-                startActivity(intent);
-
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });
-
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        mcallbackManager.onActivityResult(requestCode,resultCode,data);
-
-    }
     // A method to change welcome activity to log in fragment
     public void proceedAction(View v){
         Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);

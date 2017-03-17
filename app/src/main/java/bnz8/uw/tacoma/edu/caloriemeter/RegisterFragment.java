@@ -18,7 +18,6 @@ public class RegisterFragment extends Fragment {
     private EditText mUsername;
     private EditText mPassword;
     private Button mSignupButton;
-    private Button mRegBtn;
 
     // Required empty public constructor
     public RegisterFragment() {

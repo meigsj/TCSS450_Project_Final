@@ -114,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements SignInFragment.Lo
      * A private method to create the email and passowrds.
      * @param email the email to be appended.
      * @param password the password to be appeded.
-     * @param url
-     * @return
+     * @param url The current url
+     * @return the complete url
      */
     private String buildString(String email, String password, String url) {
         StringBuilder stringBuilder = new StringBuilder(url);
